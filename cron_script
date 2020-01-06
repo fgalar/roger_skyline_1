@@ -1,0 +1,15 @@
+#!/bin/bash
+old="/etc/crontab_cpy"
+current="/etc/crontab"
+
+#verifie l'existence du fichier. Si negatif le cree
+(ls $old >> /dev/null 2>&1) || cp $current $old
+
+if cmp -s $old $current
+then
+       	echo "Le fichier n'a pas ete modifie"
+else
+	echo "Le fichier a ete modifie" | sudo mail -s "ALERT!" /var/spool/mail/root
+	sudo rm $old 
+	sudo cp $current $old
+fi
