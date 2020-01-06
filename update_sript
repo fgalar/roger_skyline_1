@@ -1,0 +1,6 @@
+#!/bin/bash
+
+date | tee -a /var/log/update_script.log
+sudo apt-get update | tee -a /var/log/update_script.log
+sudo apt-get upgrade | tee -a /var/log/update_script.log
+
